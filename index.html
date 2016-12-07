@@ -6,11 +6,13 @@
 	<title>Document</title>
 </head>
 <body>
-<input type="text" autocomplete="on" placeholder="type a station">
-<ul data-bind="foreach: stations">	
+<input type="text" autocomplete="on" placeholder="type a station" data-bind="textInput: filter, valueUpdate: 'afterkeydown'">
+
+<ul data-bind="foreach: filteredItems">	
 	<li data-bind="text: $data.name"></li>
 </ul>
 
+<p>Testing textInput: <span data-bind="text: filter"></span></p>
 <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js'></script>
 <script type="text/javascript" src='app.js'></script>
 </body>

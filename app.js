@@ -43,10 +43,20 @@ function stations(data){
 function SubWayListViewModel() {
 	var self = this;
 	self.stations = ko.observableArray([]);
+	self.filter = ko.observable('');
 
 	allStations.forEach(function(station){
 		self.stations.push( new stations(station))
 	});
+
+	self.filteredItems = ko.computed(function(){
+		var filter = self.filter().toLowerCase();
+		if (!filter){
+			return self.stations()
+		} else {
+			console.log("working");
+		}
+	}, self)
 }
 
 ko.applyBindings(new SubWayListViewModel());
