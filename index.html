@@ -7,12 +7,13 @@
 </head>
 <body>
 <input type="text" autocomplete="on" placeholder="type a station" data-bind="textInput: filter, valueUpdate: 'afterkeydown'">
-
+<p data-bind="visible: filteredItems().length == 0"> Woops! Your search results did not return a station.</p>
+<p>Number of items in stations observable array <span data-bind="text: filteredItems().length"></span></p>
 <ul data-bind="foreach: filteredItems">	
 	<li data-bind="text: $data.name"></li>
 </ul>
 
-<p>Testing textInput: <span data-bind="text: filter"></span></p>
+
 <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js'></script>
 <script type="text/javascript" src='app.js'></script>
 </body>
