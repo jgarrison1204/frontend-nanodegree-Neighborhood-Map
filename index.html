@@ -6,8 +6,9 @@
 	<title>Document</title>
 </head>
 <body>
+<input type="text" autocomplete="on" placeholder="type a station">
 <ul data-bind="foreach: stations">	
-	<li data-bind="text: subwayName"></li>
+	<li data-bind="text: $data.name"></li>
 </ul>
 
 <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js'></script>
