@@ -2,19 +2,36 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-
 	<title>Document</title>
+	<style>
+      html,
+      body {
+        font-family: Arial, sans-serif;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      #map {
+        height: 100%;
+      }
+    </style>
 </head>
 <body>
-<input type="text" autocomplete="on" placeholder="type a station" data-bind="textInput: filter, valueUpdate: 'afterkeydown'">
-<p data-bind="visible: filteredItems().length == 0"> Woops! Your search results did not return a station.</p>
-<p>Number of items in stations observable array <span data-bind="text: filteredItems().length"></span></p>
-<ul data-bind="foreach: filteredItems">	
-	<li data-bind="text: $data.name"></li>
-</ul>
-
+	<input type="text" autocomplete="on" placeholder="type a station" data-bind="textInput: filter, valueUpdate: 'afterkeydown'">
+	<p data-bind="visible: filteredItems().length == 0"> Woops! Your search results did not return a station.</p>
+	<p>Number of items in stations observable array <span data-bind="text: filteredItems().length"></span></p>
+	<ul data-bind="foreach: filteredItems">	
+		<li data-bind="text: $data.name"></li>
+	</ul>
+	<div id="map"></div>
 
 <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js'></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript" src='app.js'></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?libraries=places,drawing,geometry&v=3&key=AIzaSyCbuDn09RHjG8AvINCGJaPGRfi8zAvdVwc&v=3&callback=initMap"></script>
 </body>
 </html>
+
+
+<!-- https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=34.078159,-118.260557&radius=5000&type=bar&keyword=happy&key=AIzaSyCbuDn09RHjG8AvINCGJaPGRfi8zAvdVwc&v -->
