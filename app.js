@@ -56,8 +56,13 @@ function SubWayListViewModel() {
 	});
 
 		//add eventlistener to li item thorugh knockoutjs.On click map marker should animate to bounce. Click binding passes the current object into the function
-	self.toggleBounceListClick = function(locationClick){
+	self.listClickEvents = function(locationClick){
 		//toggles animation property on Marker instance when location is clicked from list <li>.
+		toggleBounce(locationClick);
+		openInfoWindow(locationClick);
+	}
+
+	function toggleBounce (locationClick){
 		if (locationClick.marker.getAnimation() === 1){
 			locationClick.marker.setAnimation(null);
 		} else {
@@ -65,6 +70,12 @@ function SubWayListViewModel() {
 			bounceTimer(locationClick.marker);
 		}
 	}
+
+	function openInfoWindow(locationClick){
+		var marker = locationClick.marker;
+		infowindow.open(map, marker);
+	}
+
 	//toggles animation property on Marker instance when location is clicked from marker.
 	function toggleBounceMarkerClick(){
 		if (this.getAnimation() === 1){
@@ -80,6 +91,7 @@ function SubWayListViewModel() {
     		marker.setAnimation(null); 
     	}, 5000);
 	}
+
 	//iterate over the stations ko.observable array and add a new marker object for each location.
 	self.stations().forEach(function(location){
 		var marker = new google.maps.Marker({
@@ -89,9 +101,11 @@ function SubWayListViewModel() {
 			title: location.name
 		});
 		//Adds event listeners to each instance of Marker that toggles bounce animation.
-		marker.addListener('click', function() {
+		self.createInfoWindow = function() {
     		infowindow.open(map, marker);
- 		});		
+ 		};
+
+		marker.addListener('click', self.createInfoWindow);		
 		marker.addListener('click', toggleBounceMarkerClick);
 		//adds marker to each item in the array.  Appends a property 'marker' and a value of the instaniated class Marker to each item in the array.
 		location.marker = marker; 

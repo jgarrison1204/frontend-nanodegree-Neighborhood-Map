@@ -22,7 +22,7 @@
 	<p data-bind="visible: filteredItems().length == 0"> Woops! Your search results did not return a station.</p>
 	<p>Number of items in stations observable array <span data-bind="text: filteredItems().length"></span></p>
 	<ul data-bind="foreach: filteredItems">
-		<li data-bind="text: name, click: $parent.toggleBounceListClick"></li>
+		<li data-bind="text: name, click: $parent.listClickEvents"></li>
 	</ul>
 	<div id="map"></div>
 
