@@ -48,15 +48,35 @@ function SubWayListViewModel() {
 	self.filter = ko.observable('');
 
 	model.forEach(function(station){
-		self.stations.push(station)
+		self.stations.push(station);
 	});
 
-	function toggleBounce(){
-		if (this.getAnimation() === 1){
-			this.setAnimation(null)
+		//add eventlistener to li item thorugh knockoutjs.On click map marker should animate to bounce. Click binding passes the current object into the function
+	self.toggleBounceListClick = function(locationClick){
+		//toggles animation property on Marker instance when location is clicked from list <li>.
+		if (locationClick.marker.getAnimation() === 1){
+			locationClick.marker.setAnimation(null);
 		} else {
-			this.setAnimation(1)
+			locationClick.marker.setAnimation(1)
+			console.log(this, location.marker);
+			bounceTimer(locationClick.marker);
 		}
+	}
+	//toggles animation property on Marker instance when location is clicked from marker.
+	function toggleBounceMarkerClick(){
+		if (this.getAnimation() === 1){
+			this.setAnimation(null);
+		} else {
+			this.setAnimation(1);
+			bounceTimer(this);
+		}
+	}
+	
+	function bounceTimer(marker) {
+		console.log(marker);
+    	setTimeout(function(){ 
+    		marker.setAnimation(null); 
+    	}, 5000);
 	}
 	//iterate over the stations ko.observable array and add a new marker object for each location.
 	self.stations().forEach(function(location){
@@ -67,7 +87,7 @@ function SubWayListViewModel() {
 			title: location.name
 		});
 		//Adds event listeners to each instance of Marker that toggles bounce animation.
-		marker.addListener('click', toggleBounce)
+		marker.addListener('click', toggleBounceMarkerClick)
 		//adds marker to each item in the array.  Appends a property 'marker' and a value of the instaniated class Marker to each item in the array.
 		location.marker = marker; 
 	})
@@ -79,26 +99,17 @@ function SubWayListViewModel() {
 		var filter = self.filter().toLowerCase();
 		//if filter has no text (strings) in it call self.stations which returns entire array of stations
 		if (!filter){
-			return self.stations()
+			return self.stations();
 		//if filter then do something else.....
 		} else {
 			//returning some ko.utils arrfilter which takes an arry as first parameter and and a function that returns a boolean
 			return ko.utils.arrayFilter(self.stations(), function(item){
-				//takes item.name() which returns the value of the name property of all items in the stations() observableArray and makes the string lowercase. Th search function takes the user input from the input and returns a boolean for each item in the stations() observableArray after each keyup. For search function any value greater than -1 is true. -1 is false. 
+				//takes item.name() which returns the value of the name property of all items in the stations() observableArray and makes the string lowercase. The search function takes the user input from the input and returns a boolean for each item in the stations() observableArray after each keyup. For search function any value greater than -1 is true. -1 is false. 
 				return item.name.toLowerCase().search(filter) > -1;
 			})
 		} 
 	})
 
-	//add eventlistener to li item thorugh knockoutjs.On click map marker should animate to bounce. Click binding passes the current object into the function
-	self.bounceMarker = function(locationClick){
-		//removes marker from li element that was clicked
-		locationClick.marker.setMap(null); 
-		//updates animation to bounce
-		locationClick.marker.animation = google.maps.Animation.BOUNCE;
-		//renders updated marker
-		locationClick.marker.setMap(map);
-	}
 }
 
 var map;
