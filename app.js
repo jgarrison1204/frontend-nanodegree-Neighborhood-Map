@@ -75,7 +75,7 @@ function SubWayListViewModel() {
 			//returning some ko.utils arrfilter which takes an arry as first parameter and and a function that returns a boolean
 			return ko.utils.arrayFilter(self.stations(), function(item){
 				//takes item.name() which returns the value of the name property of all items in the stations() observableArray and makes the string lowercase. Th search function takes the user input from the input and returns a boolean for each item in the stations() observableArray after each keyup. For search function any value greater than -1 is true. -1 is false. 
-				return item.name().toLowerCase().search(filter) > -1;
+				return item.name.toLowerCase().search(filter) > -1;
 			})
 		} 
 	})
