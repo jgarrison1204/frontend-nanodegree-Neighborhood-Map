@@ -43,6 +43,10 @@ var model = [
 
 function SubWayListViewModel() {
 	var self = this;
+	var infowindow = new google.maps.InfoWindow({
+    	content: "contentString"
+	});
+
 	self.stations = ko.observableArray([]);
 	//sets varaible filter to a ko.obesrvable
 	self.filter = ko.observable('');
@@ -58,7 +62,6 @@ function SubWayListViewModel() {
 			locationClick.marker.setAnimation(null);
 		} else {
 			locationClick.marker.setAnimation(1)
-			console.log(this, location.marker);
 			bounceTimer(locationClick.marker);
 		}
 	}
@@ -73,7 +76,6 @@ function SubWayListViewModel() {
 	}
 	
 	function bounceTimer(marker) {
-		console.log(marker);
     	setTimeout(function(){ 
     		marker.setAnimation(null); 
     	}, 5000);
@@ -87,7 +89,10 @@ function SubWayListViewModel() {
 			title: location.name
 		});
 		//Adds event listeners to each instance of Marker that toggles bounce animation.
-		marker.addListener('click', toggleBounceMarkerClick)
+		marker.addListener('click', function() {
+    		infowindow.open(map, marker);
+ 		});		
+		marker.addListener('click', toggleBounceMarkerClick);
 		//adds marker to each item in the array.  Appends a property 'marker' and a value of the instaniated class Marker to each item in the array.
 		location.marker = marker; 
 	})
