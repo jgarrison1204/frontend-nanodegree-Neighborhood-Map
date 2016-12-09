@@ -1,54 +1,45 @@
 var model = [
 	{
-		"subwayName": "Union Station", 
+		"name": "Union Station", 
 		"address": "801 N Vignes St, Los Angeles 90012",
-		"geolocation":  {lat: 34.056219, lng: -118.236502} 
+		"geoLocation":  {lat: 34.056219, lng: -118.236502} 
 	},
 	{
-		"subwayName": "Civic Center", 
+		"name": "Civic Center", 
 		"address": "101 S Hill St, Los Angeles 90013",
-		"geolocation":  {lat: 34.05426, lng: -118.246891}
+		"geoLocation":  {lat: 34.05426, lng: -118.246891}
 	},
 	{
-		"subwayName": "Pershing Square", 
+		"name": "Pershing Square", 
 		"address": "500 S Hill St, Los Angeles 90013",
-		"geolocation":  {lat: 34.04851, lng: -118.253278}
+		"geoLocation":  {lat: 34.04851, lng: -118.253278}
 	},
 	{	
-		"subwayName": "7th St/Metro Center", 
+		"name": "7th St/Metro Center", 
 		"address": "660 S Figueroa St, Los Angeles 90017",
-		"geolocation":  {lat: 34.048707, lng: -118.258518}
+		"geoLocation":  {lat: 34.048707, lng: -118.258518}
 	},
 	{
-		"subwayName": "Westlake/MacArthur Park",
+		"name": "Westlake/MacArthur Park",
 		"address": "660 S Alvarado St, Los Angeles 90057",
-		"geolocation":  {lat: 34.05721, lng: -118.275925 }
+		"geoLocation":  {lat: 34.05721, lng: -118.275925 }
 	},
 	{
-		"subwayName": "Wilshire/Vermont", 
+		"name": "Wilshire/Vermont", 
 		"address": "3191 Wilshire Bl, Los Angeles 90005",
-		"geolocation":  {lat: 34.062256, lng: -118.289497 } 
+		"geoLocation":  {lat: 34.062256, lng: -118.289497 } 
 	},
 	{			
-		"subwayName": "Wilshire/Normandie",
+		"name": "Wilshire/Normandie",
 		"address": "3510 Wilshire Bl, Los Angeles 90005",
-		"geolocation":  {lat: 34.061332, lng: -118.301165 }
+		"geoLocation":  {lat: 34.061332, lng: -118.301165 }
 	},
 	{
-		"subwayName": "Wilshire/Western", 
+		"name": "Wilshire/Western", 
 		"address": "3775 Wilshire Bl, Los Angeles 90005",
-		"geolocation":  {lat: 34.06211, lng: -118.308859 }
+		"geoLocation":  {lat: 34.06211, lng: -118.308859 }
 	}
 ];
-
-
-function stations(data){
-	var self = this;
-
-	self.name = ko.observable(data.subwayName);
-	self.address = ko.observable(data.address);
-	self.geoLocation = ko.observable(data.geolocation);
-}
 
 function SubWayListViewModel() {
 	var self = this;
@@ -57,31 +48,21 @@ function SubWayListViewModel() {
 	self.filter = ko.observable('');
 
 	model.forEach(function(station){
-		self.stations.push( new stations(station))
+		self.stations.push(station)
 	});
 
-	//Render markers from the ViewModel....refactored the code below on line 75 from notes(https://discussions.udacity.com/t/having-trouble-on-markers-array/181801/4) 
-	// for (var i = 0; i < model.length; i++) {
-		//     createMarker(model[i]);
-		// }
-
-	// function createMarker(marker){
-	//    	var marker = new google.maps.Marker({
-		//      position: marker.geolocation,
-		//      map: map,
-		//  	title: ""
-	 //    	});
-	 // }
+	//iterate over the stations ko.observable array and add a new marker object for each location.
 	self.stations().forEach(function(location){
 		var marker = new google.maps.Marker({
 			map: map,
-			position: location.geoLocation(),
-			title: location.name()
+			position: location.geoLocation,
+			animation: google.maps.Animation.DROP,
+			title: location.name
 		});
-
+		//adds marker to each item in the array.  Appends a property and a value to each item in the array.
 		location.marker = marker;
 	})
-
+		
 	//creates a property on the object SubWayListView with a ko.computed function as a value. 
 	self.filteredItems = ko.computed(function(){
 		//sets local variable filter to the value of self.filter which takes userinput from an input.  makes all entered string lowercase
@@ -98,6 +79,13 @@ function SubWayListViewModel() {
 			})
 		} 
 	})
+
+	//add eventlistener to li item. On click map marker should animate to bounce.
+	self.bounceMarker = function(locationClick){
+		locationClick.marker.setMap(null); 
+		locationClick.marker.animation = google.maps.Animation.BOUNCE;
+		locationClick.marker.setMap(map);
+	}
 }
 
 var map;
