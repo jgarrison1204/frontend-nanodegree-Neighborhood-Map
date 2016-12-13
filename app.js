@@ -154,3 +154,4 @@ function initMap() {
 	ko.applyBindings(new SubWayListViewModel());
 }
 
+TEST
