@@ -154,4 +154,39 @@ function initMap() {
 	ko.applyBindings(new SubWayListViewModel());
 }
 
-TEST
+function nonceGenerator(){
+	var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    for(var i = 0; i < possible.length; i++) {
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    return text;
+}
+
+var yelpAPIUrl = "https://api.yelp.com/v2/search?term=food&location=San+Francisco";
+var consumerKey = "pKjjkCVkTPY3raywLLURWw";
+var token = "0kyG3xnOCwbfeuP_ouJIlB5WA8MUgOmu";
+var consumerSecret = "S9gTUkQ61Tvmx6P00nz8FJSXkXI";
+var tokenSecret = "SEz4rCsWi3Ky2UJY9r9OHFK561Q";
+
+var parameters = {
+	oauth_consumer_key: consumerKey,
+	oauth_token: token,
+	oauth_signature_method: "hmac-sha1",
+	oauth_timestamp: Date.now(),
+	//this is typical for oauth found this explanation: see this for explanation https://www.thepolyglotdeveloper.com/2015/03/create-a-random-nonce-string-using-javascript/
+	oauth_nonce: nonceGenerator(),
+};
+
+var encodedSignature = oauthSignature.generate('GET', yelpAPIUrl, parameters, consumerSecret, tokenSecret);
+
+	parameters.oauth_signature = encodedSignature;
+
+
+$.ajax({
+	url: yelpAPIUrl,
+    dataType: "jsonp",
+}).done(function(data){
+	console.log(data);
+});
+
