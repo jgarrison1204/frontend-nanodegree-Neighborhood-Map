@@ -163,29 +163,61 @@ function nonceGenerator(){
     return text;
 }
 
-var yelpAPIUrl = "https://api.yelp.com/v2/search?term=food&location=San+Francisco";
+var yelpAPIUrl = "https://api.yelp.com/v2/search";
 var consumerKey = "pKjjkCVkTPY3raywLLURWw";
-var token = "0kyG3xnOCwbfeuP_ouJIlB5WA8MUgOmu";
+var token = "fUdERmrVQm4B28_4NMkmwGXYsk1MPTac";
 var consumerSecret = "S9gTUkQ61Tvmx6P00nz8FJSXkXI";
-var tokenSecret = "SEz4rCsWi3Ky2UJY9r9OHFK561Q";
+var tokenSecret = "fhDfkFZlEVCIxBPfeZv47fF4MEA";
 
 var parameters = {
 	oauth_consumer_key: consumerKey,
 	oauth_token: token,
-	oauth_signature_method: "hmac-sha1",
-	oauth_timestamp: Date.now(),
+	oauth_signature_method: 'HMAC-SHA1',
+	oauth_timestamp: Math.floor(Date.now()/1000),
 	//this is typical for oauth found this explanation: see this for explanation https://www.thepolyglotdeveloper.com/2015/03/create-a-random-nonce-string-using-javascript/
 	oauth_nonce: nonceGenerator(),
+	oauth_version : 1.0,
+	callback: 'cb',
+	term: "food",
+	location: "San+Francisco"             
 };
 
 var encodedSignature = oauthSignature.generate('GET', yelpAPIUrl, parameters, consumerSecret, tokenSecret);
-
 	parameters.oauth_signature = encodedSignature;
 
-
-$.ajax({
+var settings = {
 	url: yelpAPIUrl,
+    data: parameters,
+    cache: true,
     dataType: "jsonp",
-}).done(function(data){
-	console.log(data);
-});
+    success: function(results){
+    	console.log(results);
+    }
+};
+
+$.ajax(settings);
+
+// "http://api.yelp.com/v2/search?callback=jQuery31105132409010548145_1481662652800"
+// &oauth_consumer_key=pKjjkCVkTPY3raywLLURWw
+// &oauth_token=0kyG3xnOCwbfeuP_ouJIlB5WA8MUgOmu
+// &oauth_signature_method=hmac-sha1
+// &oauth_timestamp=1481662652806
+// &oauth_nonce=uXbeEQIYvdSKDWmFly43wfPrkPWrQHOYedpHZ31ATh3w8pScXLO6mVHdWjD7GQ
+// &callback=cb
+// &term=food
+// &location=San%20Francisco
+// &oauth_signature=ODjSIx5SWISQdVoEMI%252BFugegDNw%253D
+
+// http://api.yelp.com/v2/search?callback=jQuery211014617381850257516_1432097797119
+// &oauth_consumer_key=SOMEKEYHERE
+// &oauth_token=SOMETOKENHERE
+// &oauth_nonce=192824960453
+// &oauth_timestamp=1432097803
+// &oauth_signature_method=HMAC-SHA1
+// &oauth_version=1.0
+// &callback=cb
+// &location=1032+Castro+Street%2C+Mountain+View
+// &term=cafe
+// &cll=37.385083%2C-122.08460200000002
+// &oauth_signature=OURENCODEDSIGNATURE
+
