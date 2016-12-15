@@ -154,10 +154,14 @@ function initMap() {
 	ko.applyBindings(new SubWayListViewModel());
 }
 
+//**************---oauth authentication and yelp ajax request---*******************
+//returns a randomly generated string for nonce.
 function nonceGenerator(){
+	//set text to empty string
 	var text = "";
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     for(var i = 0; i < possible.length; i++) {
+        //append random letter/number from possible 
         text += possible.charAt(Math.floor(Math.random() * possible.length));
     }
     return text;
@@ -176,7 +180,6 @@ var parameters = {
 	oauth_timestamp: Math.floor(Date.now()/1000),
 	//this is typical for oauth found this explanation: see this for explanation https://www.thepolyglotdeveloper.com/2015/03/create-a-random-nonce-string-using-javascript/
 	oauth_nonce: nonceGenerator(),
-	oauth_version : 1.0,
 	callback: 'cb',
 	term: "food",
 	location: "San+Francisco"             
@@ -190,34 +193,9 @@ var settings = {
     data: parameters,
     cache: true,
     dataType: "jsonp",
-    success: function(results){
-    	console.log(results);
-    }
 };
 
-$.ajax(settings);
-
-// "http://api.yelp.com/v2/search?callback=jQuery31105132409010548145_1481662652800"
-// &oauth_consumer_key=pKjjkCVkTPY3raywLLURWw
-// &oauth_token=0kyG3xnOCwbfeuP_ouJIlB5WA8MUgOmu
-// &oauth_signature_method=hmac-sha1
-// &oauth_timestamp=1481662652806
-// &oauth_nonce=uXbeEQIYvdSKDWmFly43wfPrkPWrQHOYedpHZ31ATh3w8pScXLO6mVHdWjD7GQ
-// &callback=cb
-// &term=food
-// &location=San%20Francisco
-// &oauth_signature=ODjSIx5SWISQdVoEMI%252BFugegDNw%253D
-
-// http://api.yelp.com/v2/search?callback=jQuery211014617381850257516_1432097797119
-// &oauth_consumer_key=SOMEKEYHERE
-// &oauth_token=SOMETOKENHERE
-// &oauth_nonce=192824960453
-// &oauth_timestamp=1432097803
-// &oauth_signature_method=HMAC-SHA1
-// &oauth_version=1.0
-// &callback=cb
-// &location=1032+Castro+Street%2C+Mountain+View
-// &term=cafe
-// &cll=37.385083%2C-122.08460200000002
-// &oauth_signature=OURENCODEDSIGNATURE
-
+//Used .done to return data from success ajax call because success was depreicated after jQuery 3.0
+$.ajax(settings).done(function(data){
+	return data;
+});
