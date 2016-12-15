@@ -196,6 +196,10 @@ var settings = {
 };
 
 //Used .done to return data from success ajax call because success was depreicated after jQuery 3.0
-$.ajax(settings).done(function(data){
-	return data;
+$.ajax(settings)
+.done(function(data){
+	 console.log(data);
+})
+.fail(function(){
+	alert("Oops looks like we can't access Yelp right now. Please browse the site and try refreshing the page in a few minutes.")
 });
