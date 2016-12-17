@@ -2,50 +2,49 @@ var model = [
 	{
 		"name": "Union Station", 
 		"address": "801 N Vignes St, Los Angeles 90012",
-		"geoLocation":  {lat: 34.056219, lng: -118.236502} 
+		"geoLocation":  {lat: 34.056219, lng: -118.236502},
+		"yelpId": "pellicola-pizzeria-los-angeles" 
 	},
 	{
 		"name": "Civic Center", 
 		"address": "101 S Hill St, Los Angeles 90013",
-		"geoLocation":  {lat: 34.05426, lng: -118.246891}
+		"geoLocation":  {lat: 34.05426, lng: -118.246891},
+		"yelpId": "baldoria-los-angeles" 
 	},
-	{
-		"name": "Pershing Square", 
-		"address": "500 S Hill St, Los Angeles 90013",
-		"geoLocation":  {lat: 34.04851, lng: -118.253278}
-	},
-	{	
-		"name": "7th St/Metro Center", 
-		"address": "660 S Figueroa St, Los Angeles 90017",
-		"geoLocation":  {lat: 34.048707, lng: -118.258518}
-	},
-	{
-		"name": "Westlake/MacArthur Park",
-		"address": "660 S Alvarado St, Los Angeles 90057",
-		"geoLocation":  {lat: 34.05721, lng: -118.275925 }
-	},
-	{
-		"name": "Wilshire/Vermont", 
-		"address": "3191 Wilshire Bl, Los Angeles 90005",
-		"geoLocation":  {lat: 34.062256, lng: -118.289497 } 
-	},
-	{			
-		"name": "Wilshire/Normandie",
-		"address": "3510 Wilshire Bl, Los Angeles 90005",
-		"geoLocation":  {lat: 34.061332, lng: -118.301165 }
-	},
-	{
-		"name": "Wilshire/Western", 
-		"address": "3775 Wilshire Bl, Los Angeles 90005",
-		"geoLocation":  {lat: 34.06211, lng: -118.308859 }
-	}
+	// {
+	// 	"name": "Pershing Square", 
+	// 	"address": "500 S Hill St, Los Angeles 90013",
+	// 	"geoLocation":  {lat: 34.04851, lng: -118.253278}
+	// },
+	// {	
+	// 	"name": "7th St/Metro Center", 
+	// 	"address": "660 S Figueroa St, Los Angeles 90017",
+	// 	"geoLocation":  {lat: 34.048707, lng: -118.258518}
+	// },
+	// {
+	// 	"name": "Westlake/MacArthur Park",
+	// 	"address": "660 S Alvarado St, Los Angeles 90057",
+	// 	"geoLocation":  {lat: 34.05721, lng: -118.275925 }
+	// },
+	// {
+	// 	"name": "Wilshire/Vermont", 
+	// 	"address": "3191 Wilshire Bl, Los Angeles 90005",
+	// 	"geoLocation":  {lat: 34.062256, lng: -118.289497 } 
+	// },
+	// {			
+	// 	"name": "Wilshire/Normandie",
+	// 	"address": "3510 Wilshire Bl, Los Angeles 90005",
+	// 	"geoLocation":  {lat: 34.061332, lng: -118.301165 }
+	// },
+	// {
+	// 	"name": "Wilshire/Western", 
+	// 	"address": "3775 Wilshire Bl, Los Angeles 90005",
+	// 	"geoLocation":  {lat: 34.06211, lng: -118.308859 }
+	// }
 ];
 
 function SubWayListViewModel() {
 	var self = this;
-	var infowindow = new google.maps.InfoWindow({
-    	content: "contentString"
-	});
 
 	self.stations = ko.observableArray([]);
 	//sets varaible filter to a ko.obesrvable
@@ -96,16 +95,17 @@ function SubWayListViewModel() {
 	self.stations().forEach(function(location){
 		var marker = new google.maps.Marker({
 			map: map,
+			test: "it works",
 			position: location.geoLocation,
 			animation: google.maps.Animation.DROP,
 			title: location.name
 		});
 		//Adds event listeners to each instance of Marker that toggles bounce animation.
-		self.createInfoWindow = function() {
+		self.openInfoWindow = function() {
     		infowindow.open(map, marker);
  		};
 
-		marker.addListener('click', self.createInfoWindow);		
+		marker.addListener('click', self.openInfoWindow);		
 		marker.addListener('click', toggleBounceMarkerClick);
 		//adds marker to each item in the array.  Appends a property 'marker' and a value of the instaniated class Marker to each item in the array.
 		location.marker = marker; 
@@ -131,25 +131,29 @@ function SubWayListViewModel() {
 
 }
 
-var map;
+var map, infowindow;
 function initMap() {
      var self = this;
      //Testing out how styles work....
-     var styles = [
-         {
-             featureType: 'road.local',
-             elementType: 'geometry.fill',
-             stylers: [{color: '#FFB6C1'}]
-         }
-     ];
+	var styles = [
+	 	{
+			featureType: 'road.local',
+			elementType: 'geometry.fill',
+			stylers: [{color: '#FFB6C1'}]
+		}
+    ];
 
-     var downTown = {lat: 34.052235, lng: -118.243683};
-     // Constructor creates a new map - only center and zoom are required.
-     map = new google.maps.Map(document.getElementById('map'), {
+    var downTown = {lat: 34.052235, lng: -118.243683};
+    // Constructor creates a new map - only center and zoom are required.
+    map = new google.maps.Map(document.getElementById('map'), {
         center: downTown,
        	zoom: 13,
        	styles: styles
      });
+
+    infowindow = new google.maps.InfoWindow({
+
+	});
 
 	ko.applyBindings(new SubWayListViewModel());
 }
@@ -167,39 +171,45 @@ function nonceGenerator(){
     return text;
 }
 
-var yelpAPIUrl = "https://api.yelp.com/v2/search";
-var consumerKey = "pKjjkCVkTPY3raywLLURWw";
-var token = "fUdERmrVQm4B28_4NMkmwGXYsk1MPTac";
-var consumerSecret = "S9gTUkQ61Tvmx6P00nz8FJSXkXI";
-var tokenSecret = "fhDfkFZlEVCIxBPfeZv47fF4MEA";
+(function yelpInvoker (){
+	model.forEach(function(item, i){
+		var yelpAPIUrl = "https://api.yelp.com/v2/business/" + model[i].yelpId;
+		var consumerKey = "pKjjkCVkTPY3raywLLURWw";
+		var token = "fUdERmrVQm4B28_4NMkmwGXYsk1MPTac";
+		var consumerSecret = "S9gTUkQ61Tvmx6P00nz8FJSXkXI";
+		var tokenSecret = "fhDfkFZlEVCIxBPfeZv47fF4MEA";
 
-var parameters = {
-	oauth_consumer_key: consumerKey,
-	oauth_token: token,
-	oauth_signature_method: 'HMAC-SHA1',
-	oauth_timestamp: Math.floor(Date.now()/1000),
-	//this is typical for oauth found this explanation: see this for explanation https://www.thepolyglotdeveloper.com/2015/03/create-a-random-nonce-string-using-javascript/
-	oauth_nonce: nonceGenerator(),
-	callback: 'cb',
-	term: "food",
-	location: "San+Francisco"             
-};
+		var parameters = {
+			oauth_consumer_key: consumerKey,
+			oauth_token: token,
+			oauth_signature_method: 'HMAC-SHA1',
+			oauth_timestamp: Math.floor(Date.now()/1000),
+			//this is typical for oauth found this explanation: see this for explanation https://www.thepolyglotdeveloper.com/2015/03/create-a-random-nonce-string-using-javascript/
+			oauth_nonce: nonceGenerator(),
+			callback: 'cb'         
+		};
 
-var encodedSignature = oauthSignature.generate('GET', yelpAPIUrl, parameters, consumerSecret, tokenSecret);
-	parameters.oauth_signature = encodedSignature;
+		var encodedSignature = oauthSignature.generate('GET', yelpAPIUrl, parameters, consumerSecret, tokenSecret);
+			parameters.oauth_signature = encodedSignature;
 
-var settings = {
-	url: yelpAPIUrl,
-    data: parameters,
-    cache: true,
-    dataType: "jsonp",
-};
+		var settings = {
+			url: yelpAPIUrl,
+		    data: parameters,
+		    cache: true,
+		    dataType: "jsonp",
+		};
 
-//Used .done to return data from success ajax call because success was depreicated after jQuery 3.0
-$.ajax(settings)
-.done(function(data){
-	 console.log(data);
-})
-.fail(function(){
-	alert("Oops looks like we can't access Yelp right now. Please browse the site and try refreshing the page in a few minutes.")
-});
+		//Used .done to return data from success ajax call because success was depreicated after jQuery 3.0
+		$.ajax(settings)
+		.done(function(returnedData){
+			var data = returnedData;
+			name = data.name;
+			var marker = model[i].marker
+			marker.title = name;
+			console.log(marker.title);
+		})
+		.fail(function(){
+			alert("Oops looks like we can't access Yelp right now. Please browse the site and try refreshing the page in a few minutes.")
+		});
+	})
+})();
