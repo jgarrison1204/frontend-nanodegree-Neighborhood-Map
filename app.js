@@ -54,7 +54,7 @@ function SubWayListViewModel() {
 		self.stations.push(station);
 	});
 
-		//add eventlistener to li item thorugh knockoutjs.On click map marker should animate to bounce. Click binding passes the current object into the function
+	//add eventlistener to li item thorugh knockoutjs.On click map marker should animate to bounce. Click binding passes the current object into the function
 	self.listClickEvents = function(locationClick){
 		//toggles animation property on Marker instance when location is clicked from list <li>.
 		toggleBounce(locationClick);
@@ -95,13 +95,14 @@ function SubWayListViewModel() {
 	self.stations().forEach(function(location){
 		var marker = new google.maps.Marker({
 			map: map,
-			test: "it works",
 			position: location.geoLocation,
 			animation: google.maps.Animation.DROP,
 			title: location.name
 		});
 		//Adds event listeners to each instance of Marker that toggles bounce animation.
 		self.openInfoWindow = function() {
+			var content = "<div> "+ marker.title + "<br>" + "<img src="+marker.rating +"></img><br><img src="+ marker.imageSnapShot+"> </img></div>.";
+			infowindow.setContent(content); 
     		infowindow.open(map, marker);
  		};
 
@@ -151,9 +152,7 @@ function initMap() {
        	styles: styles
      });
 
-    infowindow = new google.maps.InfoWindow({
-
-	});
+    infowindow = new google.maps.InfoWindow;
 
 	ko.applyBindings(new SubWayListViewModel());
 }
@@ -203,10 +202,14 @@ function nonceGenerator(){
 		$.ajax(settings)
 		.done(function(returnedData){
 			var data = returnedData;
-			name = data.name;
-			var marker = model[i].marker
+			var name = data.name;
+			var rating = data.rating_img_url_small;
+			var imageSnapShot = data.image_url;
+			var marker = model[i].marker;
 			marker.title = name;
-			console.log(marker.title);
+			marker.rating = rating;
+			marker.imageSnapShot = imageSnapShot;
+			console.log(data);
 		})
 		.fail(function(){
 			alert("Oops looks like we can't access Yelp right now. Please browse the site and try refreshing the page in a few minutes.")
