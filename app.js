@@ -1,46 +1,34 @@
 var model = [
 	{
-		"name": "Union Station", 
-		"address": "801 N Vignes St, Los Angeles 90012",
-		"geoLocation":  {lat: 34.056219, lng: -118.236502},
-		"yelpId": "pellicola-pizzeria-los-angeles" 
+		"name": "Golden Gopher", 
+		"address": "417 W. 8th St, Los Angeles, CA 90014",
+		"geoLocation":  {lat: 34.04501, lng: -118.25619},
+		"yelpId": "golden-gopher-los-angeles" 
 	},
 	{
-		"name": "Civic Center", 
-		"address": "101 S Hill St, Los Angeles 90013",
-		"geoLocation":  {lat: 34.05426, lng: -118.246891},
+		"name": "Baldoria", 
+		"address": "",
+		"geoLocation":  {lat: 34.0482589, lng: -118.2423212},
 		"yelpId": "baldoria-los-angeles" 
 	},
-	// {
-	// 	"name": "Pershing Square", 
-	// 	"address": "500 S Hill St, Los Angeles 90013",
-	// 	"geoLocation":  {lat: 34.04851, lng: -118.253278}
-	// },
-	// {	
-	// 	"name": "7th St/Metro Center", 
-	// 	"address": "660 S Figueroa St, Los Angeles 90017",
-	// 	"geoLocation":  {lat: 34.048707, lng: -118.258518}
-	// },
-	// {
-	// 	"name": "Westlake/MacArthur Park",
-	// 	"address": "660 S Alvarado St, Los Angeles 90057",
-	// 	"geoLocation":  {lat: 34.05721, lng: -118.275925 }
-	// },
-	// {
-	// 	"name": "Wilshire/Vermont", 
-	// 	"address": "3191 Wilshire Bl, Los Angeles 90005",
-	// 	"geoLocation":  {lat: 34.062256, lng: -118.289497 } 
-	// },
-	// {			
-	// 	"name": "Wilshire/Normandie",
-	// 	"address": "3510 Wilshire Bl, Los Angeles 90005",
-	// 	"geoLocation":  {lat: 34.061332, lng: -118.301165 }
-	// },
-	// {
-	// 	"name": "Wilshire/Western", 
-	// 	"address": "3775 Wilshire Bl, Los Angeles 90005",
-	// 	"geoLocation":  {lat: 34.06211, lng: -118.308859 }
-	// }
+	{	
+		"name": "Miro", 
+		"address": "888 Wilshire Blvd, Los Angeles, CA 90017",
+		"geoLocation":  {lat: 34.049792, lng: -118.259187},
+		"yelpId": "miro-los-angeles"
+	},
+	{
+		"name": "Wokcano",
+		"address": "800 W 7th St, Los Angeles, CA 90017",
+		"geoLocation":  {lat: 34.0486002281524, lng: -118.259231314681},
+		"yelpId": "wokcano-los-angeles-4"
+	},
+	{
+		"name": "Arashi Sushi", 
+		"address": "1111 S Hope St #100, Los Angeles, CA 90015",
+		"geoLocation":  {lat: 34.04209, lng: -118.2637},
+		"yelpId": "arashi-sushi-los-angeles" 
+	}
 ];
 
 function SubWayListViewModel() {
