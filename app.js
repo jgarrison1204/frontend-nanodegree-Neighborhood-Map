@@ -100,11 +100,13 @@ function SubWayListViewModel() {
 			animation: google.maps.Animation.DROP,
 			title: location.name
 		});
-		//Adds event listeners to each instance of Marker that toggles bounce animation.
 		self.openInfoWindow = function() {
+			var content = "<div> "+ marker.title + "<br>" + "<img src="+marker.rating +"></img><br><img src="+ marker.imageSnapShot+"> </img></div>.";
+			infowindow.setContent(content); 
     		infowindow.open(map, marker);
  		};
 
+		//Adds event listeners to each instance of Marker that toggles bounce animation.
 		marker.addListener('click', self.openInfoWindow);		
 		marker.addListener('click', toggleBounceMarkerClick);
 		//adds marker to each item in the array.  Appends a property 'marker' and a value of the instaniated class Marker to each item in the array.
@@ -203,10 +205,10 @@ function nonceGenerator(){
 		$.ajax(settings)
 		.done(function(returnedData){
 			var data = returnedData;
-			name = data.name;
-			var marker = model[i].marker
-			marker.title = name;
-			console.log(marker.title);
+			var marker = model[i].marker;
+			marker.title = data.name;
+			marker.rating = data.rating_img_url_small;
+			marker.imageSnapShot = data.image_url;
 		})
 		.fail(function(){
 			alert("Oops looks like we can't access Yelp right now. Please browse the site and try refreshing the page in a few minutes.")
