@@ -54,7 +54,7 @@ function SubWayListViewModel() {
 		self.stations.push(station);
 	});
 
-		//add eventlistener to li item thorugh knockoutjs.On click map marker should animate to bounce. Click binding passes the current object into the function
+	//add eventlistener to li item thorugh knockoutjs.On click map marker should animate to bounce. Click binding passes the current object into the function
 	self.listClickEvents = function(locationClick){
 		//toggles animation property on Marker instance when location is clicked from list <li>.
 		toggleBounce(locationClick);
@@ -72,7 +72,9 @@ function SubWayListViewModel() {
 
 	function openInfoWindow(locationClick){
 		var marker = locationClick.marker;
-		infowindow.open(map, marker);
+		var content = "<div> "+ marker.title + "<br>" + "<img src="+marker.rating +"></img><br><img src="+ marker.imageSnapShot+"> </img></div>.";
+			infowindow.setContent(content); 
+    		infowindow.open(map, marker);
 	}
 
 	//toggles animation property on Marker instance when location is clicked from marker.
