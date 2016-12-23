@@ -4,6 +4,9 @@ body {
    height: 100%;
    background-color: black;
 }
+a #menu svg {
+	width: 40px;
+}
 #map {
    height: 100%;
    min-height: 900px;
@@ -14,20 +17,21 @@ body {
 #input-wrapper{
 	background-color: rgb(71,71,77);
 }
-#sidebar-wrapper{
-	z-index: 1;
+.sidebar-wrapper{
 	position: absolute;
+	z-index: 1;
+	overflow-y: hidden;
 	width: 300px;
 	height: 100%;
-	overflow-y: hidden;
+	opacity: 0.9;
 	background: #2C3E50;
 	border: 2px solid white;
-	opacity: 0.9;
+	transform: translate(-300px, 0);
+	transition: transform 0.5s ease;
 }
 #page-wrapper{
 	width: 100%;
 	position: absolute;
-	padding-left: 300px;
 	margin-left: 0px;
 }
 #filter{
@@ -35,6 +39,9 @@ body {
 	color: black;
 	background-color: white;
    	color: lightgrey;
+}
+.open{
+	transform: translate(0, 0);
 }
 .header-color{
    color: lightgrey;
@@ -56,4 +63,13 @@ body {
 	line-height: 50px;
 	border: 1px solid lightgrey;
 	display: block;
+}
+
+@media only screen and (min-width: 767px) {
+    .sidebar-wrapper {
+      transform: translate(0, 0);
+    }
+    #menu{
+    	display: none;
+    }
 }
