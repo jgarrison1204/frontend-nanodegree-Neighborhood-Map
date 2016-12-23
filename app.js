@@ -216,4 +216,5 @@ function nonceGenerator(){
 
 $("#menu").click(function(){
 	$("nav").toggleClass("open");
+	$("#instructions").hide();
 })
