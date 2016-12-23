@@ -77,7 +77,6 @@ hr {
 	border: 1px solid lightgrey;
 	display: block;
 }
-
 .instructions-open{
 	opacity: 0.5; 
 	background-color: black; 
@@ -86,11 +85,15 @@ hr {
 	position: absolute; 
 	color: white; 
 	font-style: italic;
-	padding: 0 5%;
+	width: 100%;
+	text-align: center;
 }
 @media only screen and (min-width: 767px) {
     .sidebar-wrapper {
       transform: translate(0, 0);
       width: 300px;
+    }
+    .instructions-open{
+    	display: none;
     }
 }
