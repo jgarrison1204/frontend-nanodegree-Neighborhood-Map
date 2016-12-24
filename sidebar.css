@@ -18,6 +18,9 @@ hr {
 	padding-left: 2%;
 	text-align: center;
 }
+#menu-icon {
+	display: table-cell;
+}
 #input-wrapper{
 	background-color: rgb(71,71,77);
 	width: 100%;
@@ -77,23 +80,35 @@ hr {
 	border: 1px solid lightgrey;
 	display: block;
 }
-.instructions-open{
-	opacity: 0.5; 
+.instructions {
+	opacity: 0.8; 
 	background-color: black; 
 	z-index: 2; 
-	margin-top: 25%; 
+	margin-top: 15%;
 	position: absolute; 
 	color: white; 
 	font-style: italic;
 	width: 100%;
 	text-align: center;
 }
+.instructions-open {
+	opacity: 1.0; 
+	background-color: lightgrey; 
+	z-index: 2; 
+	margin-top: 15%;
+	position: absolute; 
+	color: white; 
+	font-style: italic;
+	width: 40px;
+	text-align: center;
+}
+
 @media only screen and (min-width: 767px) {
     .sidebar-wrapper {
       transform: translate(0, 0);
       width: 300px;
     }
-    .instructions-open{
+    #instructions, #menu-icon, .instructions-open{
     	display: none;
     }
 }

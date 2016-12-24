@@ -1,36 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	<link rel="stylesheet" href="sidebar.css">
-	<title>Document</title>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+   <link rel="stylesheet" href="sidebar.css">
+   <title>Document</title>
 </head>
 <body>
-	<header id="header" class="header-color row">
-		<h1 id="menu" class="col-xs-12">Cheap Drinks<span class="glyphicon">&#127864;</span></h1>
-	</header>
-	<hr>
-	<main id="wrapper">
-		<nav class="sidebar-wrapper">
-			<div id="input-wrapper" class="row">
-				<div class="filter-wrapper col-xs-4 header-color">
-					<span class="glyphicon glyphicon-search filter-text"><span class="filter-text header-color">Filter</span></span>
-				</div>
-				<input id="filter" class="col-xs-8" type="text" autocomplete="on" placeholder="  type a location" data-bind="textInput: filter, valueUpdate: 'afterkeydown'">
-			</div>
-			<p data-bind="visible: filteredItems().length == 0"> Woops! Your search results did not return a station.</p>
-			<!--                <p>Number of items in stations observable array <span data-bind="text: filteredItems().length"></span></p> -->
-			<ul class="sidebar-nav" data-bind="foreach: filteredItems">
-				<li><a href="#" data-bind="text: name, click: $parent.listClickEvents"></a></li>
-			</ul>
-		</nav>
-		<section id="page-wrapper" >
-			<div class="container-fluid">
-				<section class="row">
-				<div id="instructions" class="instructions-open">Click the <span class="glyphicon">&#127864;</span> above for a list of affordable, yet classy, watering holes.</div>
-				     <section id="map"></section>
+   <header id="header" class="header-color row">
+      <h1 id="menu" class="col-xs-9 col-sm-12">Cheap Drinks<span class="glyphicon">&#127864;</span></h1>
+      <div id="icon-wrapper" class="col-xs-3">
+         <svg id="menu-icon" class="instructions-open" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M2 6h20v3H2zm0 5h20v3H2zm0 5h20v3H2z"></path>
+         </svg>
+      </div>
+   </header>
+   <hr>
+   <main id="wrapper">
+      <nav class="sidebar-wrapper">
+         <div id="input-wrapper" class="row">
+            <div class="filter-wrapper col-xs-4 header-color">
+               <span class="glyphicon glyphicon-search filter-text"><span class="filter-text header-color">Filter</span></span>
+            </div>
+            <input id="filter" class="col-xs-8" type="text" autocomplete="on" placeholder="  type a location" data-bind="textInput: filter, valueUpdate: 'afterkeydown'">
+         </div>
+         <p data-bind="visible: filteredItems().length == 0"> Woops! Your search results did not return a station.</p>
+         <ul class="sidebar-nav" data-bind="foreach: filteredItems">
+            <li><a href="#" data-bind="text: name, click: $parent.listClickEvents"></a></li>
+         </ul>
+      </nav>
+      <section id="page-wrapper" >
+         <div class="container-fluid">
+            <section class="row">
+               <div id="instructions" class="instructions">Click the menu icon above for a list of affordable, yet classy, watering holes.</div>
+            <section id="map"></section>
 				</section>  
 				</div>
 		</section>

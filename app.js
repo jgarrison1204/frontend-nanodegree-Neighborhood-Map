@@ -204,7 +204,6 @@ function nonceGenerator(){
 		.done(function(returnedData){
 			var data = returnedData;
 			var marker = model[i].marker;
-			marker.title = data.name;
 			marker.rating = data.rating_img_url_small;
 			marker.imageSnapShot = data.image_url;
 		})
@@ -214,7 +213,7 @@ function nonceGenerator(){
 	})
 })();
 
-$("#menu").click(function(){
+$("#menu-icon").click(function(){
 	$("nav").toggleClass("open");
 	$("#instructions").hide();
 })
