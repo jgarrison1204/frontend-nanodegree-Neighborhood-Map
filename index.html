@@ -16,18 +16,28 @@
          </svg>
       </div>
    </header>
-   <hr>
    <main id="wrapper">
       <nav class="sidebar-wrapper">
          <div id="input-wrapper" class="row">
-            <div class="filter-wrapper col-xs-4 header-color">
+            <div class="filter-wrapper col-xs-2 header-color">
                <span class="glyphicon glyphicon-search filter-text"><span class="filter-text header-color">Filter</span></span>
             </div>
-            <input id="filter" class="col-xs-8" type="text" autocomplete="on" placeholder="  type a location" data-bind="textInput: filter, valueUpdate: 'afterkeydown'">
+            <input id="filter" class="col-xs-10" type="text" autocomplete="on" placeholder="  type a location" data-bind="textInput: filter, valueUpdate: 'afterkeydown'">
          </div>
+         <nav id="drink-types">  
+            <header class="row item-type"> 
+               <h3 id="cocktails" class="col-xs-4 drink-type" data-bind="click: test"><span class='glyphicon'>&#127864;</span></h3>
+               <h3 id="wine" class="col-xs-4 drink-type" data-bind="click: test1"><span class='glyphicon'>&#x1F377;</span></h3>
+               <h3 id="beer" class="col-xs-4 drink-type" data-bind="click: test2"><i class='fa fa-beer' aria-hidden='true'></i></h3>
+            </header>
+         </nav>
+         <div id="seperator"></div>  
          <p data-bind="visible: filteredItems().length == 0"> Woops! Your search results did not return a station.</p>
          <ul class="sidebar-nav" data-bind="foreach: filteredItems">
-            <li><a href="#" data-bind="text: name, click: $parent.listClickEvents"></a></li>
+            <div class="row">
+               <div class="item-type col-xs-2" data-bind="html: type"></div>
+               <li data-bind="html: name, click: $parent.listClickEvents, event: {mouseover: $parent.showMarkerMouseOver, mouseout: $parent.hideMakerMouseOut}, style: { backgroundImage: 'url(\'' + image + '\')'}" class="col-xs-10 item-name"></li>
+            </div>
          </ul>
       </nav>
       <section id="page-wrapper" >
@@ -42,6 +52,7 @@
 <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js'></script>
 <script type="text/javascript" src='oauth-signature.min.js'></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://use.fontawesome.com/303bcd2469.js"></script>
 <script type="text/javascript" src='app.js'></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?libraries=places,drawing,geometry&v=3&key=AIzaSyCbuDn09RHjG8AvINCGJaPGRfi8zAvdVwc&v=3&callback=initMap"></script>   
 </body>
