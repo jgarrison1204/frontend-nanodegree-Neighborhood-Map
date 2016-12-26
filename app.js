@@ -1,6 +1,6 @@
 var model = [
 	{
-		"name": "<h3>Golden Gopher</h3>", 
+		"name": "Golden Gopher", 
 		"address": "417 W. 8th St, Los Angeles, CA 90014",
 		"geoLocation":  {lat: 34.04501, lng: -118.25619},
 		"type": "<h3><span class='glyphicon'>&#127864;</span></h3>",
@@ -9,7 +9,7 @@ var model = [
 		"yelpId": "golden-gopher-los-angeles" 
 	},
 	{
-		"name": "<h3>Baldoria</h3>", 
+		"name": "Arts District Brewery", 
 		"address": "",
 		"geoLocation":  {lat: 34.0482589, lng: -118.2423212},
 		"type": "<h3><span class='glyphicon'>&#x1F377;</span></h3>",
@@ -18,7 +18,7 @@ var model = [
 		"yelpId": "baldoria-los-angeles" 
 	},
 	{	
-		"name": "<h3>Miro</h3>", 
+		"name": "Miro", 
 		"address": "888 Wilshire Blvd, Los Angeles, CA 90017",
 		"geoLocation":  {lat: 34.049792, lng: -118.259187},
 		"type": "<h3><span class='glyphicon'>&#x1F377;</span></h3>",
@@ -27,7 +27,7 @@ var model = [
 		"yelpId": "miro-los-angeles"
 	},
 	{
-		"name": "<h3>Wokcano</h3>",
+		"name": "Wokcano",
 		"address": "800 W 7th St, Los Angeles, CA 90017",
 		"geoLocation":  {lat: 34.0486002281524, lng: -118.259231314681},
 		"type": "<h3><i class='fa fa-beer' aria-hidden='true'></i></h3>",
@@ -36,7 +36,7 @@ var model = [
 		"yelpId": "wokcano-los-angeles-4"
 	},
 	{
-		"name": "<h3>Arashi Sushi</h3>", 
+		"name": "Arashi Sushi", 
 		"address": "1111 S Hope St #100, Los Angeles, CA 90015",
 		"geoLocation":  {lat: 34.04209, lng: -118.2637},
 		"type": "<h3><span class='glyphicon'>&#x1F378;</span></h3>",

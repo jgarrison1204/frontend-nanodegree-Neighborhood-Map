@@ -36,7 +36,7 @@
          <ul class="sidebar-nav" data-bind="foreach: filteredItems">
             <div class="row">
                <div class="item-type col-xs-2" data-bind="html: type"></div>
-               <li data-bind="html: name, click: $parent.listClickEvents, event: {mouseover: $parent.showMarkerMouseOver, mouseout: $parent.hideMakerMouseOut}, style: { backgroundImage: 'url(\'' + image + '\')'}" class="col-xs-10 item-name"></li>
+               <li data-bind="click: $parent.listClickEvents, event: {mouseover: $parent.showMarkerMouseOver, mouseout: $parent.hideMakerMouseOut}, style: { backgroundImage: 'url(\'' + image + '\')'}" class="col-xs-10 item-name"> <h3 data-bind="text: name"></h3></li>
             </div>
          </ul>
       </nav>
