@@ -52,6 +52,7 @@ function SubWayListViewModel() {
 	self.stations = ko.observableArray([]);
 	//sets varaible filter to a ko.obesrvable
 	self.filter = ko.observable('');
+	self.cockTail = ko.observable('');
 
 	model.forEach(function(station){
 		self.stations.push(station);
@@ -123,8 +124,32 @@ function SubWayListViewModel() {
 		//adds marker to each item in the array.  Appends a property 'marker' and a value of the instaniated class Marker to each item in the array.
 		location.marker = marker; 
 	})
+	self.filterCocktail = function(){
+		self.stations().forEach(function(item, i){
+			if (item.typeId === "1") {
+				console.log(item);
+			}
+		})
+	}	
+	self.filterWine = function(){
+		self.stations().forEach(function(item, i){
+			if (item.typeId === "2") {
+				console.log(item);
+			}
+		})
+	}	
+	self.filterBeer = function(){
+		self.stations().forEach(function(item, i){
+			if (item.typeId === "3") {
+				console.log(item);
+			}
+		})
+	}
 	//creates a property on the object SubWayListView with a ko.computed function as a value. 
 	self.filteredItems = ko.computed(function(){
+		self.test = function(){
+			console.log("working")
+		}
 		//sets local variable filter to the value of self.filter which takes userinput from an input.  makes all entered string lowercase
 		var filter = self.filter().toLowerCase();
 		//if filter has no text (strings) in it call self.stations which returns entire array of stations and set all marker visible to true. 
