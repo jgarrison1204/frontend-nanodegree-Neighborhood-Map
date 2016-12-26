@@ -10,6 +10,17 @@ a #menu svg {
 hr {
 	margin-top: 0px;
 }
+li {
+	color: 	white;
+}
+li:hover {
+  background-color: darkgrey;
+  -webkit-filter: grayscale(100%); /* Chrome, Safari, Opera */
+  filter: grayscale(100%);
+  color: lightblue;
+  font-style: italic;	
+}
+
 #map {
    height: 100%;
    min-height: 900px;
@@ -18,8 +29,19 @@ hr {
 	padding-left: 2%;
 	text-align: center;
 }
+#drink-types {
+	width: 	100%;
+}
 #menu-icon {
 	display: table-cell;
+	margin-top: 20px;
+}
+#seperator {
+	background-color: black;
+	height: 5px;
+}
+#beer {
+	padding-right: 15px;
 }
 #input-wrapper{
 	background-color: rgb(71,71,77);
@@ -100,6 +122,22 @@ hr {
 	color: white; 
 	font-style: italic;
 	width: 40px;
+	text-align: center;
+}
+.drink-type {
+	padding: 0px;
+	border-right: 1px solid white;
+}
+.drink-type:last-child {
+	border: none;
+}
+.item-name, .item-type {
+	min-height: 75px;
+	border: 1px solid white;
+} 
+.item-type {
+	background-color: lightgrey;
+	padding-right: 0px;
 	text-align: center;
 }
 
