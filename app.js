@@ -1,32 +1,47 @@
 var model = [
 	{
-		"name": "Golden Gopher", 
+		"name": "<h3>Golden Gopher</h3>", 
 		"address": "417 W. 8th St, Los Angeles, CA 90014",
 		"geoLocation":  {lat: 34.04501, lng: -118.25619},
+		"type": "<h3><span class='glyphicon'>&#127864;</span></h3>",
+		"typeId": "1",
+		"image": 'gg.jpg',
 		"yelpId": "golden-gopher-los-angeles" 
 	},
 	{
-		"name": "Baldoria", 
+		"name": "<h3>Baldoria</h3>", 
 		"address": "",
 		"geoLocation":  {lat: 34.0482589, lng: -118.2423212},
+		"type": "<h3><span class='glyphicon'>&#x1F377;</span></h3>",
+		"typeId": "2",
+		"image": 'ACBrewery.jpg',
 		"yelpId": "baldoria-los-angeles" 
 	},
 	{	
-		"name": "Miro", 
+		"name": "<h3>Miro</h3>", 
 		"address": "888 Wilshire Blvd, Los Angeles, CA 90017",
 		"geoLocation":  {lat: 34.049792, lng: -118.259187},
+		"type": "<h3><span class='glyphicon'>&#x1F377;</span></h3>",
+		"typeId": "3",
+		"image": "<style> background-image: url('gg.jpg')</style>",
 		"yelpId": "miro-los-angeles"
 	},
 	{
-		"name": "Wokcano",
+		"name": "<h3>Wokcano</h3>",
 		"address": "800 W 7th St, Los Angeles, CA 90017",
 		"geoLocation":  {lat: 34.0486002281524, lng: -118.259231314681},
+		"type": "<h3><i class='fa fa-beer' aria-hidden='true'></i></h3>",
+		"typeId": "3",
+		"image": "<style> background-image: url('gg.jpg')</style>",
 		"yelpId": "wokcano-los-angeles-4"
 	},
 	{
-		"name": "Arashi Sushi", 
+		"name": "<h3>Arashi Sushi</h3>", 
 		"address": "1111 S Hope St #100, Los Angeles, CA 90015",
 		"geoLocation":  {lat: 34.04209, lng: -118.2637},
+		"type": "<h3><span class='glyphicon'>&#x1F378;</span></h3>",
+		"typeId": "2",
+		"image": "<style> background-image: url('gg.jpg')</style>",
 		"yelpId": "arashi-sushi-los-angeles" 
 	}
 ];
@@ -48,10 +63,16 @@ function SubWayListViewModel() {
 		toggleBounce(locationClick);
 		openInfoWindow(locationClick);
 	}
-
+	self.showMarkerMouseOver = function(item){
+		item.marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
+	}
+	self.hideMakerMouseOut = function(item){
+		item.marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png')
+	}
 	function toggleBounce (locationClick){
 		if (locationClick.marker.getAnimation() === 1){
 			locationClick.marker.setAnimation(null);
+			locationClick.marker.setIcon
 		} else {
 			locationClick.marker.setAnimation(1)
 			bounceTimer(locationClick.marker);
@@ -85,7 +106,6 @@ function SubWayListViewModel() {
 	self.stations().forEach(function(location){
 		var marker = new google.maps.Marker({
 			map: map,
-			test: "it works",
 			position: location.geoLocation,
 			animation: google.maps.Animation.DROP,
 			title: location.name
@@ -102,7 +122,6 @@ function SubWayListViewModel() {
 		//adds marker to each item in the array.  Appends a property 'marker' and a value of the instaniated class Marker to each item in the array.
 		location.marker = marker; 
 	})
-	
 	//creates a property on the object SubWayListView with a ko.computed function as a value. 
 	self.filteredItems = ko.computed(function(){
 		//sets local variable filter to the value of self.filter which takes userinput from an input.  makes all entered string lowercase
@@ -147,7 +166,7 @@ function initMap() {
     // Constructor creates a new map - only center and zoom are required.
     map = new google.maps.Map(document.getElementById('map'), {
         center: downTown,
-       	zoom: 13,
+       	zoom: 14,
        	styles: styles
      });
 
