@@ -62,6 +62,7 @@ function SubWayListViewModel() {
 		//toggles animation property on Marker instance when location is clicked from list <li>.
 		toggleBounce(locationClick);
 		openInfoWindow(locationClick);
+		$("nav").toggleClass("open");
 	}
 	self.showMarkerMouseOver = function(item){
 		item.marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
