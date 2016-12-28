@@ -9,40 +9,48 @@ var model = [
 		"yelpId": "golden-gopher-los-angeles" 
 	},
 	{
-		"name": "Arts District Brewery", 
+		"name": "Angel City Brewery", 
 		"address": "",
-		"geoLocation":  {lat: 34.0482589, lng: -118.2423212},
-		"type": "<h3><span class='glyphicon'>&#x1F377;</span></h3>",
-		"typeId": "2",
-		"image": 'ACBrewery.jpg',
-		"yelpId": "baldoria-los-angeles" 
-	},
-	{	
-		"name": "Miro", 
-		"address": "888 Wilshire Blvd, Los Angeles, CA 90017",
-		"geoLocation":  {lat: 34.049792, lng: -118.259187},
-		"type": "<h3><span class='glyphicon'>&#x1F377;</span></h3>",
-		"typeId": "3",
-		"image": "<style> background-image: url('gg.jpg')</style>",
-		"yelpId": "miro-los-angeles"
-	},
-	{
-		"name": "Wokcano",
-		"address": "800 W 7th St, Los Angeles, CA 90017",
-		"geoLocation":  {lat: 34.0486002281524, lng: -118.259231314681},
+		"geoLocation":  {lat: 34.0464394175493, lng: -118.237746882282},
 		"type": "<h3><i class='fa fa-beer' aria-hidden='true'></i></h3>",
 		"typeId": "3",
-		"image": "<style> background-image: url('gg.jpg')</style>",
-		"yelpId": "wokcano-los-angeles-4"
+		"image": 'ACBrewery.jpg',
+		"yelpId": "angel-city-brewery-los-angeles-2" 
+	},
+	{	
+		"name": "Seven Grand", 
+		"address": "515 W 7th St, Los Angeles, CA 90014",
+		"geoLocation":  {lat: 34.049792, lng: -118.259187},
+		"type": "<h3><span class='glyphicon'>&#127864;</span></h3>",
+		"typeId": "1",
+		"image": 'sevengrandwhiskeyshelf.jpg',
+		"yelpId": "seven-grand-los-angeles"
 	},
 	{
-		"name": "Arashi Sushi", 
-		"address": "1111 S Hope St #100, Los Angeles, CA 90015",
-		"geoLocation":  {lat: 34.04209, lng: -118.2637},
-		"type": "<h3><span class='glyphicon'>&#x1F378;</span></h3>",
+		"name": "Pour Haus Wine Bar",
+		"address": "1820 Industrial St, Los Angeles, CA 90021",
+		"geoLocation":  {lat: 34.03545, lng: -118.2338486},
+		"type": "<h3><span class='glyphicon'>&#x1F377;</span></h3>",
+		"image": 'pourhouse.jpg',
+		"yelpId": "pour-haus-wine-bar-los-angeles"
+	},
+	{
+		"name": "Arts District Brewing", 
+		"address": "828 Traction Avenue, Los Angeles, CA 90013",
+		"geoLocation":  {lat: 34.0446217616778, lng: -118.235323801466},
+		"type": "<h3><i class='fa fa-beer' aria-hidden='true'></i></h3>",
+		"typeId": "3",
+		"image": "artsdistrcitbrewing.jpg",
+		"yelpId": "arts-district-brewing-company-los-angeles" 
+	},
+	{
+		"name": "D'Vine Lounge Bar", 
+		"address": "821 S Flower St, Los Angeles, CA 90017",
+		"geoLocation":  {lat: 34.0467136, lng: -118.2607828},
+		"type": "<h3><span class='glyphicon'>&#x1F377;</span></h3>",
 		"typeId": "2",
-		"image": "<style> background-image: url('gg.jpg')</style>",
-		"yelpId": "arashi-sushi-los-angeles" 
+		"image": "dvine.jpg",
+		"yelpId": "d-vine-lounge-bar-los-angeles" 
 	}
 ];
 
@@ -52,12 +60,18 @@ function SubWayListViewModel() {
 	self.stations = ko.observableArray([]);
 	//sets varaible filter to a ko.obesrvable
 	self.filter = ko.observable('');
-	self.cockTail = ko.observable('');
+	self.cockTail = ko.observableArray([]);
 
-	model.forEach(function(station){
-		self.stations.push(station);
+	model.forEach(function(item){
+		self.stations.push(item);
+		if (item.typeId === "1") {
+			self.cockTail.push(item);
+		}
 	});
-
+	self.filteredCockTail = function(){
+		console.log(self.cockTail());
+		return self.cockTail();
+	} 
 	//add eventlistener to li item thorugh knockoutjs.On click map marker should animate to bounce. Click binding passes the current object into the function
 	self.listClickEvents = function(locationClick){
 		//toggles animation property on Marker instance when location is clicked from list <li>.
@@ -66,10 +80,10 @@ function SubWayListViewModel() {
 		$("nav").toggleClass("open");
 	}
 	self.showMarkerMouseOver = function(item){
-		item.marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
+		item.marker.setIcon('https://mts.googleapis.com/vt/icon/name=icons/spotlight/spotlight-waypoint-a.png&psize=11&font=fonts/Roboto-Regular.ttf&color=ff333333&ax=44&ay=48&scale=1')
 	}
 	self.hideMakerMouseOut = function(item){
-		item.marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png')
+		item.marker.setIcon('http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=|FE7569')
 	}
 	function toggleBounce (locationClick){
 		if (locationClick.marker.getAnimation() === 1){
@@ -103,14 +117,16 @@ function SubWayListViewModel() {
     		marker.setAnimation(null); 
     	}, 5000);
 	}
-
 	//iterate over the stations ko.observable array and add a new marker object for each location.
-	self.stations().forEach(function(location){
+	self.stations().forEach(function(location, i){
+		i++
+		var labelString = i.toString();
 		var marker = new google.maps.Marker({
 			map: map,
 			position: location.geoLocation,
 			animation: google.maps.Animation.DROP,
-			title: location.name
+			title: location.name,
+			label: labelString
 		});
 		self.openInfoWindow = function() {
 			var content = "<div> "+ marker.title + "<br>" + "<img src="+marker.rating +"></img><br><img src="+ marker.imageSnapShot+"> </img></div>.";
@@ -124,32 +140,8 @@ function SubWayListViewModel() {
 		//adds marker to each item in the array.  Appends a property 'marker' and a value of the instaniated class Marker to each item in the array.
 		location.marker = marker; 
 	})
-	self.filterCocktail = function(){
-		self.stations().forEach(function(item, i){
-			if (item.typeId === "1") {
-				console.log(item);
-			}
-		})
-	}	
-	self.filterWine = function(){
-		self.stations().forEach(function(item, i){
-			if (item.typeId === "2") {
-				console.log(item);
-			}
-		})
-	}	
-	self.filterBeer = function(){
-		self.stations().forEach(function(item, i){
-			if (item.typeId === "3") {
-				console.log(item);
-			}
-		})
-	}
 	//creates a property on the object SubWayListView with a ko.computed function as a value. 
 	self.filteredItems = ko.computed(function(){
-		self.test = function(){
-			console.log("working")
-		}
 		//sets local variable filter to the value of self.filter which takes userinput from an input.  makes all entered string lowercase
 		var filter = self.filter().toLowerCase();
 		//if filter has no text (strings) in it call self.stations which returns entire array of stations and set all marker visible to true. 
@@ -157,17 +149,17 @@ function SubWayListViewModel() {
 			self.stations().forEach(function(item, i){
 				item.marker.setVisible(true);	
 			})
-		return self.stations();
+			return self.stations();
 		//if filter then do something else.....
 		} else {
 			//returning some ko.utils arrfilter which takes an arry as first parameter and and a function that returns a boolean
-			return ko.utils.arrayFilter(self.stations(), function(item){
+			return ko.utils.arrayFilter(self.stations(), function(item, i){
 				//takes item.name() which returns the value of the name property of all items in the stations() observableArray and makes the string lowercase. The search function takes the user input from the input and returns a boolean for each item in the stations() observableArray after each keyup. For search function any value greater than -1 is true. -1 is false. 
-				if (item.name.toLowerCase().indexOf(filter) > -1){
+				if (item.name.toLowerCase().startsWith(filter) === true){
 					//if item in array is returned from filter then make marker visible and return the item in array.
 					item.marker.setVisible(true);
 					return item;
-				}else{
+				} else{
 					//if item is not returned from filter then set marker visible to false.
 					item.marker.setVisible(false);	
 				} 
@@ -188,7 +180,7 @@ function initMap() {
 		}
     ];
 
-    var downTown = {lat: 34.052235, lng: -118.243683};
+    var downTown = {lat: 34.042235, lng: -118.243683};
     // Constructor creates a new map - only center and zoom are required.
     map = new google.maps.Map(document.getElementById('map'), {
         center: downTown,
