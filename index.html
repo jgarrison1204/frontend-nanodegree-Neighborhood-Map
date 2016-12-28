@@ -26,7 +26,7 @@
          </div>
          <nav id="drink-types">  
             <header class="row item-type"> 
-               <h3 id="cocktails" class="col-xs-4 drink-type" data-bind="click: filteredItems.test"><span class='glyphicon'>&#127864;</span></h3>
+               <h3 id="cocktails" class="col-xs-4 drink-type" data-bind="click: filteredCockTail"><span class='glyphicon'>&#127864;</span></h3>
                <h3 id="wine" class="col-xs-4 drink-type"><span class='glyphicon'>&#x1F377;</span></h3>
                <h3 id="beer" class="col-xs-4 drink-type"><i class='fa fa-beer' aria-hidden='true'></i></h3>
             </header>
@@ -36,7 +36,7 @@
          <ul class="sidebar-nav" data-bind="foreach: filteredItems">
             <div class="row">
                <div class="item-type col-xs-2" data-bind="html: type"></div>
-               <li data-bind="click: $parent.listClickEvents, event: {mouseover: $parent.showMarkerMouseOver, mouseout: $parent.hideMakerMouseOut}, style: { backgroundImage: 'url(\'' + image + '\')'}" class="col-xs-10 item-name"> <h3 data-bind="text: name"></h3></li>
+               <li style="display: flex;" data-bind="click: $parent.listClickEvents, event: {mouseover: $parent.showMarkerMouseOver, mouseout: $parent.hideMakerMouseOut}, style: { backgroundImage: 'url(\'' + image + '\')'}" class="col-xs-10 item-name"> <h3 data-bind="text: ($index() + 1)"></h3><h3>.</h3><h3 data-bind="text: name"> </h3></li>
             </div>
          </ul>
       </nav>
