@@ -142,12 +142,16 @@ function SubWayListViewModel() {
 	})
 	//creates a property on the object SubWayListView with a ko.computed function as a value. 
 	self.filteredItems = ko.computed(function(){
+		var currentLabel = 0;
 		//sets local variable filter to the value of self.filter which takes userinput from an input.  makes all entered string lowercase
 		var filter = self.filter().toLowerCase();
 		//if filter has no text (strings) in it call self.stations which returns entire array of stations and set all marker visible to true. 
 		if (!filter){
 			self.stations().forEach(function(item, i){
 				item.marker.setVisible(true);	
+				currentLabel++;
+				currentLabel = currentLabel.toString();		
+				item.marker.setLabel(currentLabel);
 			})
 			return self.stations();
 		//if filter then do something else.....
@@ -157,6 +161,9 @@ function SubWayListViewModel() {
 				//takes item.name() which returns the value of the name property of all items in the stations() observableArray and makes the string lowercase. The search function takes the user input from the input and returns a boolean for each item in the stations() observableArray after each keyup. For search function any value greater than -1 is true. -1 is false. 
 				if (item.name.toLowerCase().startsWith(filter) === true){
 					//if item in array is returned from filter then make marker visible and return the item in array.
+					currentLabel++;
+					currentLabel = currentLabel.toString();		
+					item.marker.setLabel(currentLabel);
 					item.marker.setVisible(true);
 					return item;
 				} else{
