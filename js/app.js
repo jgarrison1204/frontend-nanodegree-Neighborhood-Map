@@ -5,7 +5,7 @@ var model = [
 		"geoLocation":  {lat: 34.04501, lng: -118.25619},
 		"type": "<h3><span class='glyphicon'>&#127864;</span></h3>",
 		"typeId": "1",
-		"image": 'images/gg.jpg',
+		"image": 'images/gg-min.jpg',
 		"yelpId": "golden-gopher-los-angeles" 
 	},
 	{
@@ -14,7 +14,7 @@ var model = [
 		"geoLocation":  {lat: 34.0464394175493, lng: -118.237746882282},
 		"type": "<h3><i class='fa fa-beer' aria-hidden='true'></i></h3>",
 		"typeId": "3",
-		"image": 'images/ACBrewery.jpg',
+		"image": 'images/ACBrewery-min.jpg',
 		"yelpId": "angel-city-brewery-los-angeles-2" 
 	},
 	{	
@@ -23,7 +23,7 @@ var model = [
 		"geoLocation":  {lat: 34.049792, lng: -118.259187},
 		"type": "<h3><span class='glyphicon'>&#127864;</span></h3>",
 		"typeId": "1",
-		"image": 'images/sevengrandwhiskeyshelf.jpg',
+		"image": 'images/sevengrandwhiskeyshelf-min.jpg',
 		"yelpId": "seven-grand-los-angeles"
 	},
 	{
@@ -31,7 +31,7 @@ var model = [
 		"address": "1820 Industrial St, Los Angeles, CA 90021",
 		"geoLocation":  {lat: 34.03545, lng: -118.2338486},
 		"type": "<h3><span class='glyphicon'>&#x1F377;</span></h3>",
-		"image": 'images/pourhouse.jpg',
+		"image": 'images/pourhouse-min.jpg',
 		"yelpId": "pour-haus-wine-bar-los-angeles"
 	},
 	{
@@ -40,7 +40,7 @@ var model = [
 		"geoLocation":  {lat: 34.0446217616778, lng: -118.235323801466},
 		"type": "<h3><i class='fa fa-beer' aria-hidden='true'></i></h3>",
 		"typeId": "3",
-		"image": "images/artsdistrcitbrewing.jpg",
+		"image": "images/artsdistrcitbrewing-min.jpg",
 		"yelpId": "arts-district-brewing-company-los-angeles" 
 	},
 	{
@@ -49,7 +49,7 @@ var model = [
 		"geoLocation":  {lat: 34.0467136, lng: -118.2607828},
 		"type": "<h3><span class='glyphicon'>&#x1F377;</span></h3>",
 		"typeId": "2",
-		"image": "images/dvine.jpg",
+		"image": "images/dvine-min.jpg",
 		"yelpId": "d-vine-lounge-bar-los-angeles" 
 	}
 ];
