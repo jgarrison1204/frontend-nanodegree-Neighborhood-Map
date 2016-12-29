@@ -22,8 +22,7 @@ li:hover {
 }
 
 #map {
-   height: 100%;
-   min-height: 900px;
+   height: 100vh;
 }
 #header{
 	padding-left: 2%;
@@ -68,18 +67,18 @@ li:hover {
 	border: 2px solid white;
 	transform: translate(-100%, 0);
 	transition: transform 0.5s ease;
-	min-height: 900px;
+	height: 100vh;
 }
 .open{
 	transform: translate(0, 0);
 }
 .header-color{
-   color: lightgrey;
+   	color: lightgrey;
 }
 .filter-wrapper{
-  width: 36px;
-  display: flex;
-  justify-content: center;
+	width: 36px;
+	display: flex;
+	justify-content: center;
 }
 .filter-text{
 	margin: 0px 5%;
