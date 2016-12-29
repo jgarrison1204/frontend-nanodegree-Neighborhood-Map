@@ -242,7 +242,6 @@ function nonceGenerator(){
 		    cache: true,
 		    dataType: "jsonp",
 		};
-
 		//Used .done to return data from success ajax call because success was depreicated after jQuery 3.0
 		$.ajax(settings)
 		.done(function(returnedData){
@@ -256,7 +255,7 @@ function nonceGenerator(){
 		});
 	})
 })();
-
+//toggle side-bar nav and instriuctions on click.  
 $("#menu-icon").click(function(){
 	$("nav").toggleClass("open");
 	$("#instructions").hide();
