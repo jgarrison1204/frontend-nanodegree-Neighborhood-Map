@@ -53,8 +53,12 @@ var model = [
 		"yelpId": "d-vine-lounge-bar-los-angeles" 
 	}
 ];
+//Google map error handeling. 
+function googleError() {
+   alert( "Opps google maps isn't cooperating right now.  Please check back later.");
+}
 
-function SubWayListViewModel() {
+function BarListViewModel() {
 	var self = this;
 
 	self.stations = ko.observableArray([]);
@@ -68,10 +72,6 @@ function SubWayListViewModel() {
 			self.cockTail.push(item);
 		}
 	});
-	self.filteredCockTail = function(){
-		console.log(self.cockTail());
-		return self.cockTail();
-	} 
 	//add eventlistener to li item thorugh knockoutjs.On click map marker should animate to bounce. Click binding passes the current object into the function
 	self.listClickEvents = function(locationClick){
 		//toggles animation property on Marker instance when location is clicked from list <li>.
@@ -199,7 +199,7 @@ function initMap() {
 
 	});
 
-	ko.applyBindings(new SubWayListViewModel());
+	ko.applyBindings(new BarListViewModel());
 }
 
 //**************---oauth authentication and yelp ajax request---*******************
