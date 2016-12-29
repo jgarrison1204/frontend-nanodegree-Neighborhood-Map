@@ -44,21 +44,17 @@ li:hover {
 	padding-right: 15px;
 }
 #input-wrapper{
+	display: flex; 
+  	align-items: center;
 	background-color: rgb(71,71,77);
-	width: 100%;
-	margin: 0px;
+}
+#filter {
+  flex: 1;
 }
 #page-wrapper{
 	width: 100%;
 	position: absolute;
 	margin-left: 0px;
-}
-#filter{
-	min-height: 36px;
-	color: black;
-	background-color: white;
-   	color: lightgrey;
-   	padding: 0px;
 }
 .sidebar-wrapper{
 	position: absolute;
@@ -81,11 +77,9 @@ li:hover {
    color: lightgrey;
 }
 .filter-wrapper{
-	background-color: rgb(71,71,77);
-	min-height: 36px;
-	text-align: right;
-	padding: 0px;
-	padding-top: 8px;
+  width: 36px;
+  display: flex;
+  justify-content: center;
 }
 .filter-text{
 	margin: 0px 5%;

@@ -18,11 +18,11 @@
    </header>
    <main id="wrapper">
       <nav class="sidebar-wrapper">
-         <div id="input-wrapper" class="row">
-            <div class="filter-wrapper col-xs-2 header-color">
-               <span class="glyphicon glyphicon-search filter-text"><span class="filter-text header-color">Filter</span></span>
+         <div id="input-wrapper">
+            <div class="filter-wrapper header-color">
+               <span class="glyphicon glyphicon-filter filter-text"></span>
             </div>
-            <input id="filter" class="col-xs-10" type="text" autocomplete="on" placeholder="  type a location" data-bind="textInput: filter, valueUpdate: 'afterkeydown'">
+            <input id="filter" type="text" autocomplete="on" placeholder="  type a location" data-bind="textInput: filter">
          </div>
          <div id="seperator"></div>  
          <p data-bind="visible: filteredItems().length == 0"> Woops! Your search results did not return a station.</p>
