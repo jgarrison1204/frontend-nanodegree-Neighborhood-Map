@@ -85,7 +85,7 @@ function BarListViewModel() {
 	function toggleBounce (locationClick){
 		if (locationClick.marker.getAnimation() === 1){
 			locationClick.marker.setAnimation(null);
-			locationClick.marker.setIcon;
+			locationClick.marker.setIcon();
 		} else {
 			locationClick.marker.setAnimation(1);
 			bounceTimer(locationClick.marker);
