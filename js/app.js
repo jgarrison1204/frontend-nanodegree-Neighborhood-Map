@@ -57,10 +57,10 @@ var model = [
 function googleError() {
    alert( "Opps google maps isn't cooperating right now.  Please check back later.");
 }
-
+//List View Model
 function BarListViewModel() {
 	var self = this;
-
+	
 	self.stations = ko.observableArray([]);
 	//sets varaible filter to a ko.obesrvable
 	self.filter = ko.observable('');
@@ -75,30 +75,29 @@ function BarListViewModel() {
 		openInfoWindow(locationClick);
 		map.panTo(locationClick.marker.getPosition());
 		$("nav").toggleClass("open");
-	}
+	};
 	self.showMarkerMouseOver = function(item){
-		item.marker.setIcon('https://mts.googleapis.com/vt/icon/name=icons/spotlight/spotlight-waypoint-a.png&psize=11&font=fonts/Roboto-Regular.ttf&color=ff333333&ax=44&ay=48&scale=1')
-	}
+		item.marker.setIcon('https://mts.googleapis.com/vt/icon/name=icons/spotlight/spotlight-waypoint-a.png&psize=11&font=fonts/Roboto-Regular.ttf&color=ff333333&ax=44&ay=48&scale=1');
+	};
 	self.hideMakerMouseOut = function(item){
-		item.marker.setIcon('http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=|FE7569')
-	}
+		item.marker.setIcon('http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=|FE7569');
+	};
 	function toggleBounce (locationClick){
 		if (locationClick.marker.getAnimation() === 1){
 			locationClick.marker.setAnimation(null);
-			locationClick.marker.setIcon
+			locationClick.marker.setIcon;
 		} else {
-			locationClick.marker.setAnimation(1)
+			locationClick.marker.setAnimation(1);
 			bounceTimer(locationClick.marker);
 		}
 	}
-
+	//opens infowindow and populates it with data form yelp API
 	function openInfoWindow(locationClick){
 		var marker = locationClick.marker;
 		var content = "<div> "+ marker.title + "<br>" + "<img src="+marker.rating +"></img><br><img src="+ marker.imageSnapShot+"> </img></div>.";
 			infowindow.setContent(content); 
     		infowindow.open(map, marker);
 	}
-
 	//toggles animation property on Marker instance when location is clicked from marker.
 	function toggleBounceMarkerClick(){
 		if (this.getAnimation() === 1){
@@ -108,7 +107,7 @@ function BarListViewModel() {
 			bounceTimer(this);
 		}
 	}
-	
+	//Sets the time a marker will bounce to 5 seconds
 	function bounceTimer(marker) {
     	setTimeout(function(){ 
     		marker.setAnimation(null); 
@@ -136,7 +135,7 @@ function BarListViewModel() {
 		marker.addListener('click', toggleBounceMarkerClick);
 		//adds marker to each item in the array.  Appends a property 'marker' and a value of the instaniated class Marker to each item in the array.
 		location.marker = marker; 
-	})
+	});
 	//creates a property on the object SubWayListView with a ko.computed function as a value. 
 	self.filteredItems = ko.computed(function(){
 		var currentLabel = 0;
@@ -149,7 +148,7 @@ function BarListViewModel() {
 				currentLabel++;
 				currentLabel = currentLabel.toString();		
 				item.marker.setLabel(currentLabel);
-			})
+			});
 			return self.stations();
 		//if filter then do something else.....
 		} else {
@@ -167,14 +166,14 @@ function BarListViewModel() {
 					//if item is not returned from filter then set marker visible to false.
 					item.marker.setVisible(false);	
 				} 
-			})
+			});
 		} 
-	})
+	});
 }
 
 var map, infowindow;
 function initMap() {
-     var self = this;
+   var self = this;
      //Testing out how styles work....
 	var styles = [
 	 	{
@@ -184,15 +183,15 @@ function initMap() {
 		}
     ];
 
-    var downTown = {lat: 34.042235, lng: -118.243683};
+   var downTown = {lat: 34.042235, lng: -118.243683};
     // Constructor creates a new map - only center and zoom are required.
-    map = new google.maps.Map(document.getElementById('map'), {
-        center: downTown,
-       	zoom: 14,
-       	styles: styles
-     });
+   map = new google.maps.Map(document.getElementById('map'), {
+      center: downTown,
+      zoom: 14,
+      styles: styles
+   });
 
-    infowindow = new google.maps.InfoWindow({
+   infowindow = new google.maps.InfoWindow({
 
 	});
 
@@ -204,12 +203,12 @@ function initMap() {
 function nonceGenerator(){
 	//set text to empty string
 	var text = "";
-    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    for(var i = 0; i < possible.length; i++) {
-        //append random letter/number from possible 
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
-    }
-    return text;
+   var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+   for(var i = 0; i < possible.length; i++) {
+      //append random letter/number from possible 
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+   }
+   return text;
 }
 
 (function yelpInvoker (){
@@ -231,13 +230,13 @@ function nonceGenerator(){
 		};
 
 		var encodedSignature = oauthSignature.generate('GET', yelpAPIUrl, parameters, consumerSecret, tokenSecret);
-			parameters.oauth_signature = encodedSignature;
+		parameters.oauth_signature = encodedSignature;
 
 		var settings = {
 			url: yelpAPIUrl,
-		    data: parameters,
-		    cache: true,
-		    dataType: "jsonp",
+		   data: parameters,
+		   cache: true,
+		   dataType: "jsonp",
 		};
 		//Used .done to return data from success ajax call because success was depreicated after jQuery 3.0
 		$.ajax(settings)
@@ -248,12 +247,12 @@ function nonceGenerator(){
 			marker.imageSnapShot = data.image_url;
 		})
 		.fail(function(){
-			alert("Oops looks like we can't access Yelp right now. Please browse the site and try refreshing the page in a few minutes.")
+			alert("Oops looks like we can't access Yelp right now. Please browse the site and try refreshing the page in a few minutes.");
 		});
-	})
+	});
 })();
 //toggle side-bar nav and instriuctions on click.  
 $("#menu-icon").click(function(){
 	$("nav").toggleClass("open");
 	$("#instructions").hide();
-})
+});
