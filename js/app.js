@@ -53,7 +53,7 @@ var model = [
 		"yelpId": "d-vine-lounge-bar-los-angeles" 
 	}
 ];
-//Google map error handeling. 
+//Google map error handeling.
 function googleError() {
    alert( "Opps google maps isn't cooperating right now.  Please check back later.");
 }
@@ -64,19 +64,16 @@ function BarListViewModel() {
 	self.stations = ko.observableArray([]);
 	//sets varaible filter to a ko.obesrvable
 	self.filter = ko.observable('');
-	self.cockTail = ko.observableArray([]);
 
 	model.forEach(function(item){
 		self.stations.push(item);
-		if (item.typeId === "1") {
-			self.cockTail.push(item);
-		}
 	});
 	//add eventlistener to li item thorugh knockoutjs.On click map marker should animate to bounce. Click binding passes the current object into the function
 	self.listClickEvents = function(locationClick){
 		//toggles animation property on Marker instance when location is clicked from list <li>.
 		toggleBounce(locationClick);
 		openInfoWindow(locationClick);
+		map.panTo(locationClick.marker.getPosition());
 		$("nav").toggleClass("open");
 	}
 	self.showMarkerMouseOver = function(item){
@@ -119,7 +116,7 @@ function BarListViewModel() {
 	}
 	//iterate over the stations ko.observable array and add a new marker object for each location.
 	self.stations().forEach(function(location, i){
-		i++
+		i++;
 		var labelString = i.toString();
 		var marker = new google.maps.Marker({
 			map: map,
@@ -132,8 +129,8 @@ function BarListViewModel() {
 			var content = "<div> "+ marker.title + "<br>" + "<img src="+marker.rating +"></img><br><img src="+ marker.imageSnapShot+"> </img></div>.";
 			infowindow.setContent(content); 
     		infowindow.open(map, marker);
+    		map.panTo(marker.getPosition());
  		};
-
 		//Adds event listeners to each instance of Marker that toggles bounce animation.
 		marker.addListener('click', self.openInfoWindow);		
 		marker.addListener('click', toggleBounceMarkerClick);
