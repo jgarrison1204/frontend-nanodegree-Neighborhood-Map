@@ -29,7 +29,7 @@
          <ul class="sidebar-nav" data-bind="foreach: filteredItems">
             <div class="row">
                <div class="item-type col-xs-2" data-bind="html: type"></div>
-               <li style="display: flex;" data-bind="click: $parent.listClickEvents, event: {mouseover: $parent.showMarkerMouseOver, mouseout: $parent.hideMakerMouseOut}, style: { backgroundImage: 'url(\'' + image + '\')'}" class="col-xs-10 item-name"> <h3 data-bind="text: ($index() + 1)"></h3><h3>.</h3><h3 data-bind="text: name"> </h3></li>
+               <li class="col-xs-10 item-name li-wrapper" data-bind="click: $parent.listClickEvents, event: {mouseover: $parent.showMarkerMouseOver, mouseout: $parent.hideMakerMouseOut}, style: { backgroundImage: 'url(\'' + image + '\')'}"> <span data-bind="text: ($index() + 1)"></span><span>.&nbsp;</span><span data-bind="text: name"></span></li>
             </div>
          </ul>
       </nav>
